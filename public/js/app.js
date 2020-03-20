@@ -129,6 +129,7 @@ class Component {
             this.unobservedData.$el = null
             this.unobservedData.$refs = null
             this.unobservedData.$nextTick = null
+            this.unobservedData.$watch = null
         /* IE11-ONLY:END */
 
         // Construct a Proxy-based observable. This will be used to handle reactivity.
@@ -144,6 +145,13 @@ class Component {
         this.nextTickStack = []
         this.unobservedData.$nextTick = (callback) => {
             this.nextTickStack.push(callback)
+        }
+
+        this.watchers = {}
+        this.unobservedData.$watch = (property, callback) => {
+            if (! this.watchers[property]) this.watchers[property] = []
+
+            this.watchers[property].push(callback)
         }
 
         this.showDirectiveStack = []
@@ -178,7 +186,7 @@ class Component {
         let copy = {}
 
         Object.keys(unwrappedData).forEach(key => {
-            if (['$el', '$refs', '$nextTick'].includes(key)) return
+            if (['$el', '$refs', '$nextTick', '$watch'].includes(key)) return
 
             copy[key] = unwrappedData[key]
         })
@@ -191,6 +199,10 @@ class Component {
 
         let membrane = new observable_membrane__WEBPACK_IMPORTED_MODULE_7__["default"]({
             valueMutated(target, key) {
+                if (self.watchers[key]) {
+                    self.watchers[key].forEach(callback => callback(target[key]))
+                }
+
                 // Don't react to data changes for cases like the `x-created` hook.
                 if (self.pauseReactivity) return
 
@@ -1157,7 +1169,14 @@ const Alpine = {
 
 if (! Object(_utils__WEBPACK_IMPORTED_MODULE_1__["isTesting"])()) {
     window.Alpine = Alpine
-    window.Alpine.start()
+
+    if (window.deferLoadingAlpine) {
+        window.deferLoadingAlpine(function () {
+            window.Alpine.start()
+        })
+   } else {
+        window.Alpine.start()
+   }
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Alpine);
