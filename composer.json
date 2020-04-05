@@ -1,10 +1,9 @@
 {
-    "name": "laravel/laravel",
+    "name": "b0/backend",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "b0 backend",
     "keywords": [
-        "framework",
-        "laravel"
+        "b0"
     ],
     "license": "MIT",
     "require": {
