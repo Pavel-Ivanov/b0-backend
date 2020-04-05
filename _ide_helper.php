@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 7.2.0 on 2020-03-18 14:13:05.
+ * Generated for Laravel 7.3.0 on 2020-03-29 12:08:31.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -701,6 +701,19 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Add new prefix to list of absolute path prefixes.
+         *
+         * @param string $prefix
+         * @return \Illuminate\Foundation\Application 
+         * @static 
+         */ 
+        public static function addAbsoluteCachePathPrefix($prefix)
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        return $instance->addAbsoluteCachePathPrefix($prefix);
+        }
+        
+        /**
          * Determine if the application is currently down for maintenance.
          *
          * @return bool 
@@ -1228,9 +1241,10 @@ namespace Illuminate\Support\Facades {
          * Call the given Closure / class@method and inject its dependencies.
          *
          * @param callable|string $callback
-         * @param array $parameters
+         * @param \Illuminate\Container\array<string,  mixed>  $parameters
          * @param string|null $defaultMethod
          * @return mixed 
+         * @throws \InvalidArgumentException
          * @static 
          */ 
         public static function call($callback, $parameters = [], $defaultMethod = null)
@@ -1260,6 +1274,7 @@ namespace Illuminate\Support\Facades {
          * @param string $abstract
          * @param array $parameters
          * @return mixed 
+         * @throws \Illuminate\Contracts\Container\BindingResolutionException
          * @static 
          */ 
         public static function makeWith($abstract, $parameters = [])
@@ -1288,7 +1303,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Instantiate a concrete instance of the given type.
          *
-         * @param string $concrete
+         * @param \Closure|string $concrete
          * @return mixed 
          * @throws \Illuminate\Contracts\Container\BindingResolutionException
          * @static 
@@ -15974,6 +15989,75 @@ namespace Facade\Ignition\Facades {
  
 }
 
+namespace Intervention\Image\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Image {
+        
+        /**
+         * Overrides configuration settings
+         *
+         * @param array $config
+         * @return self 
+         * @static 
+         */ 
+        public static function configure($config = [])
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->configure($config);
+        }
+        
+        /**
+         * Initiates an Image instance from different input types
+         *
+         * @param mixed $data
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function make($data)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->make($data);
+        }
+        
+        /**
+         * Creates an empty image canvas
+         *
+         * @param int $width
+         * @param int $height
+         * @param mixed $background
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function canvas($width, $height, $background = null)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->canvas($width, $height, $background);
+        }
+        
+        /**
+         * Create new cached image and run callback
+         * (requires additional package intervention/imagecache)
+         *
+         * @param \Closure $callback
+         * @param int $lifetime
+         * @param boolean $returnObj
+         * @return \Image 
+         * @static 
+         */ 
+        public static function cache($callback, $lifetime = null, $returnObj = false)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->cache($callback, $lifetime, $returnObj);
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -18886,6 +18970,8 @@ namespace  {
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
 
     class Flare extends \Facade\Ignition\Facades\Flare {}
+
+    class Image extends \Intervention\Image\Facades\Image {}
  
 }
 

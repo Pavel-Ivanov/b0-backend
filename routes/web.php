@@ -9,4 +9,5 @@ Route::get('/', function () {
 Route::resources([
     '/manufacturers' => 'ManufacturerController',
     '/spareparts' => 'SparepartController',
+    '/news' => 'NewsController',
 ]);
