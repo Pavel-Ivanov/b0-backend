@@ -36,4 +36,20 @@ class StoreNews extends FormRequest
             'published' => ['required'],
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'Поле Заголовок обязательно для заполнения',
+            'announcement.required' => 'Поле Анонс обязательно для заполнения',
+            'body.required'  => 'Поле Текст обязательно для заполнения',
+            'meta_title.required'  => 'Поле Meta title обязательно для заполнения',
+            'meta_title.unique'  => 'Поле Meta title должно быть уникальным',
+            'meta_description.required'  => 'Поле Meta description обязательно для заполнения',
+            'alias.unique'  => 'Поле Alias должно быть уникальным',
+        ];
+    }
 }

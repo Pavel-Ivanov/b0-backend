@@ -14,7 +14,8 @@
             />
         </div>
         @error($name)
-            <p class="mt-2 text-sm text-red-500" role="alert">{{ $errors->first($name) }}</p>
+{{--            <p class="mt-2 text-sm text-red-500" role="alert">{{ $errors->first($name) }}</p>--}}
+            <p class="mt-2 text-sm text-red-500" role="alert">{{ $message }}</p>
         @enderror
     </div>
 </div>
