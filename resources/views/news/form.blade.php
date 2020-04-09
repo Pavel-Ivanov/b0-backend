@@ -49,7 +49,7 @@
             </div>
 --}}
 
-        <x-form.-textarea-field name="body" label="Текст" :value="$news->body" />
+        <x-form.-textarea-field name="body" label="Текст" required :value="$news->body" />
 
 {{--
             <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -67,13 +67,17 @@
             </div>
 --}}
 
-            <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
-                <label for="image" class="block text-sm leading-5 font-medium text-gray-700">
-                    Картинка
-                </label>
-                <input id="image" name="image" type="file">
-                <img src="{{$news->getFirstMediaUrl('news-image', 'thumb')}}" class="" />
+        <x-form.-image-field name="image" label="Картинка" :path="$news->getFirstMediaUrl('news-image', 'thumb')" />
+
+{{--
+        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
+            <label for="image" class="block text-sm leading-5 font-medium text-gray-700">
+                Картинка
+            </label>
+            <input id="image" name="image" type="file">
+            <img src="{{$news->getFirstMediaUrl('news-image', 'thumb')}}" class="" />
         </div>
+--}}
     </div>
     {{-- Мета --}}
     <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">
@@ -143,12 +147,13 @@
             </div>
 --}}
 
+{{--        TODO сделать установку value из запроса--}}
             <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                 <label for="published" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
                     Опубликовано
                 </label>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
-                    <span x-data="{ value: false, toggle() { this.value = !this.value } }" :class="{ 'bg-gray-200': !value, 'bg-indigo-600': value }"
+                    <span x-data="{ value:true, toggle() { this.value = !this.value } }" :class="{ 'bg-gray-200': !value, 'bg-indigo-600': value }"
                           class="relative inline-block flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:shadow-outline"
                           role="checkbox" tabindex="0" @click="toggle()" @keydown.space.prevent="toggle()" :aria-checked="value.toString()">
                           <span aria-hidden="true" :class="{ 'translate-x-5': value, 'translate-x-0': !value }"
